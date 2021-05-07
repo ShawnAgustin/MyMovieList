@@ -1,3 +1,8 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -17,23 +22,64 @@ code {
     background-color: #282c34;
     /* min-height: 100vh; */
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: space-around;
     font-size: calc(10px + 2vmin);
+    padding: 10px;
     color: white;
 }
 
-.App-header .Search {
-    margin-bottom: 10px;
+.Title {
+    margin-bottom: 20px;
 }
 
-.App-header .Search h5,
+.Title h1 {
+    font-size: calc(10px + 4vmin);
+}
+
+.Title p {
+    font-size: calc(10px + 0.5vmin);
+    font-style: italic;
+}
+
+.Search input {
+    text-decoration: none;
+    min-width: 60vw;
+    border-radius: 20px;
+    height: 3vh;
+    font-size: calc(10px + 0.5vmin);
+    padding-left: 15px;
+    outline: none;
+}
+
+.Search h5,
 input {
     padding: 0;
     margin: 0;
 }
 
+.Search a {
+    text-decoration: none;
+}
+
 .Movies-container {
+    margin: auto;
+    max-width: 60vw;
     display: flex;
-    justify-content: space-around
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.Movie {
+    padding: 20px;
+    max-width: 100px;
+}
+
+.Movie p {
+    text-align: left;
+}
+
+.Movie img {
+    max-height: 200px;
+    max-width: 100px;
 }

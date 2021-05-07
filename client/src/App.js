@@ -1,24 +1,38 @@
 import './App.css';
+import SearchIcon from '@material-ui/icons/Search';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
+import Movie from './components/Movie';
+
+
 
 const App = () => {
   return(
     <div className="App">
       <div className="App-header">
-        <h1> MyMovieList</h1>
+        <SearchIcon fontSize="large"/>
+        <AccountCircleIcon fontSize="large"/>
+      </div>
+      <div className="Title">
+          <h1>MyMovieList</h1>
+          <p>Find movies and keep track and of what you’ve watched and plan to watch.</p>
+      </div>
         <div className="Search">
-          <h5>Search for a movie</h5>
           <input type='text'/>
-        </div>
-        
+          <a href="http://google.com"><SearchIcon 
+          style={{position:'relative', right: 35, top: 7.5}}/>
+          </a>
       </div>
-      {/* TODO
-      create into different components MODULARIZE*/}
       <div className="Movies-container">
-        <h2>Plan to watch</h2>
-        <h2>Currently Watching</h2>
-        <h2>Completed</h2>
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie /><Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie /><Movie />
       </div>
-      
     </div>
   )
 }
