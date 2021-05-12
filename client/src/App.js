@@ -1,12 +1,22 @@
 import './App.css';
+import { useState, useEffect } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import axios from 'axios';
 
 import Movie from './components/Movie';
 
 
 
 const App = () => {
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://api.themoviedb.org/3/movie/popular?api_key=e9085c32cd25783e01c2ae6ef814c537&language=en-US&page=1")
+      .then((res) => setMovies(res.data.results));
+  },[])
+
   return(
     <div className="App">
       <div className="App-header">
@@ -24,14 +34,9 @@ const App = () => {
           </a>
       </div>
       <div className="Movies-container">
-      <Movie />
-      <Movie />
-      <Movie />
-      <Movie /><Movie />
-      <Movie />
-      <Movie />
-      <Movie />
-      <Movie /><Movie />
+      {movies.map(movie => (
+        <Movie {...movie} />
+      ))}
       </div>
     </div>
   )
