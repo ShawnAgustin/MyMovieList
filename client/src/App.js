@@ -18,7 +18,8 @@ const App = () => {
       .then((res) => setMovies(res.data.results));
   },[])
 
-  const search = () => {
+  const search = (event) => {
+    event.preventDefault();
     axios.get(`https://api.themoviedb.org/3/search/movie?api_key=e9085c32cd25783e01c2ae6ef814c537&language=en-US&query=${query}&page=1&include_adult=false`)
     .then((res) => setMovies(res.data.results));
   }
@@ -33,7 +34,8 @@ const App = () => {
           <h1>MyMovieList</h1>
           <p>Find movies and keep track and of what you’ve watched and plan to watch.</p>
       </div>
-        <form className="Search">
+        <form className="Search"
+        onSubmit={search}>
           <input type='text' 
           value={query} 
           onChange={((e) => setQuery(e.target.value))}/>
@@ -43,7 +45,7 @@ const App = () => {
       </form>
       <div className="Movies-container">
       {movies.map(movie => (
-        <Movie {...movie} />
+        <Movie key={movie.id} {...movie} />
       ))}
       </div>
     </div>
