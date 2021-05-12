@@ -42,14 +42,19 @@ code {
     font-style: italic;
 }
 
+.Search {
+    display: inline-block;
+}
+
 .Search input {
     text-decoration: none;
     min-width: 60vw;
     border-radius: 20px;
-    height: 3vh;
+    height: 4vh;
     font-size: calc(10px + 0.5vmin);
     padding-left: 15px;
     outline: none;
+    margin: 0 auto;
 }
 
 .Search h5,
@@ -62,17 +67,22 @@ input {
     text-decoration: none;
 }
 
+.content {
+    /* justify-content: center; */
+}
+
 .Movies-container {
-    margin: auto;
-    max-width: 60vw;
+    margin: 0 auto;
     display: flex;
-    justify-content: flex-start;
+    max-width: 70vw;
+    justify-content: center;
+    align-content: center;
     flex-wrap: wrap;
 }
 
 .Movie {
     padding: 20px;
-    max-width: 100px;
+    max-width: 200px;
 }
 
 .Movie p {
@@ -80,13 +90,15 @@ input {
 }
 
 .Movie img {
-    max-height: 150px;
-    max-width: 100px;
+    max-height: 300px;
+    max-width: 200px;
+    height: 300px;
+    width: 200px;
 }
 
 .No-image {
-    height: 150px;
-    width: 100px;
+    height: 300px;
+    width: 200px;
     background-color: grey;
     display: flex;
     align-items: center;

@@ -38,15 +38,19 @@ const App = () => {
         onSubmit={search}>
           <input type='text' 
           value={query} 
-          onChange={((e) => setQuery(e.target.value))}/>
+          onChange={((e) => setQuery(e.target.value))}
+          placeholder="Search for a movie"/>
           <SearchIcon 
           onClick={search}
-          style={{position:'relative', right: 35, top: 7.5}}/>
+          style={{position: 'relative', top: 7.5, right: 35,cursor:'pointer'}}
+          />
       </form>
-      <div className="Movies-container">
-      {movies.map(movie => (
-        <Movie key={movie.id} {...movie} />
-      ))}
+      <div className="content">
+        <div className="Movies-container">
+          {movies.map(movie => (
+            <Movie key={movie.id} {...movie} />
+          ))}
+        </div>
       </div>
     </div>
   )
