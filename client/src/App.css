@@ -80,6 +80,15 @@ input {
 }
 
 .Movie img {
-    max-height: 200px;
+    max-height: 150px;
     max-width: 100px;
+}
+
+.No-image {
+    height: 150px;
+    width: 100px;
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
