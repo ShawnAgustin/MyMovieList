@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weeb_dev_my_movie_list/screens/home.dart';
+import 'package:weeb_dev_my_movie_list/util/design/themes.dart';
 import 'package:weeb_dev_my_movie_list/util/helpers/init_helper.dart';
 
 void main() {
@@ -24,9 +25,7 @@ class _MyMovieListAppState extends State<MyMovieListApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp( 
-      theme: ThemeData( 
-        primarySwatch: Colors.blue,
-      ),
+      theme: Themes.mainTheme,
       home: Home()
     );
   }
