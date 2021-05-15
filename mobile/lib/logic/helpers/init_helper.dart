@@ -1,4 +1,4 @@
-import 'package:weeb_dev_my_movie_list/util/helpers/screen_manager.dart';
+import 'package:weeb_dev_my_movie_list/logic/helpers/screen_manager.dart'; 
 
 class Initializer {
   

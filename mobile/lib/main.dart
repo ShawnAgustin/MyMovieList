@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weeb_dev_my_movie_list/screens/home.dart';
-import 'package:weeb_dev_my_movie_list/util/design/themes.dart';
-import 'package:weeb_dev_my_movie_list/util/helpers/init_helper.dart';
+import 'package:weeb_dev_my_movie_list/util/style/themes.dart';
+
+import 'logic/helpers/init_helper.dart'; 
 
 void main() {
   runApp(MyMovieListApp());

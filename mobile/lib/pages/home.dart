@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:weeb_dev_my_movie_list/screens/profile.dart';
-import 'package:weeb_dev_my_movie_list/screens/search_movie.dart';
-import 'package:weeb_dev_my_movie_list/util/helpers/screen_manager.dart';
+import 'package:flutter/material.dart'; 
+import 'package:weeb_dev_my_movie_list/pages/profile.dart';
+import 'package:weeb_dev_my_movie_list/pages/search_movie.dart'; 
 
 class Home extends StatefulWidget {
   Home();
@@ -31,8 +30,8 @@ class _HomeState extends State<Home> {
           ),
           body: TabBarView(
             children: [
-              SearchMovieScreen(),
-              ProfileScreen(), 
+              SearchMoviePage(),
+              ProfilePage(), 
             ],
           ),
         ),
