@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage();
-
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
