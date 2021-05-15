@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weeb_dev_my_movie_list/screens/home.dart';
+import 'package:weeb_dev_my_movie_list/pages/home.dart'; 
 import 'package:weeb_dev_my_movie_list/util/style/themes.dart';
 
 import 'logic/helpers/init_helper.dart'; 
