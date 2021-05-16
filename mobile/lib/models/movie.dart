@@ -23,8 +23,8 @@ class Movie{
     this.backdropPath
   });
 
-  Movie.fromJson(Map<String, dynamic> json){
-    id = json["id"];
+  Movie.fromJson(Map<String, dynamic> json){ 
+    id = json["id"].toString();
     title = json["title"];
     rating = json["vote_average"]?.toDouble();
     description = json["description"];

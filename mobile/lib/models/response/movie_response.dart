@@ -10,7 +10,7 @@ class MovieResponse{
     movies = [];
     if (json["results"] != null){
       json["results"].forEach((data){
-        movies.add(Movie.fromJson(json));
+        movies.add(Movie.fromJson(data));
       });
     }
     error = "";
