@@ -13,7 +13,7 @@ const Movie = (props) => {
         </div>
       )}
 
-      <p>{title}</p>
+      <h4>{title}</h4>
       {voteAverage === 0 ? <p>No rating</p> : <p>{voteAverage}</p>}
     </div>
   );

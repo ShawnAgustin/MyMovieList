@@ -19,7 +19,7 @@ code {
 }
 
 .App-header {
-    background-color: #282c34;
+    background-color: white;
     /* min-height: 100vh; */
     display: flex;
     align-items: center;
@@ -27,13 +27,14 @@ code {
     font-size: calc(10px + 2vmin);
     padding: 10px;
     color: white;
+    padding: 0;
 }
 
 .Title {
     margin-bottom: 20px;
 }
 
-.Title h1 {
+h1 {
     font-size: calc(10px + 4vmin);
 }
 
@@ -85,7 +86,8 @@ input {
     max-width: 200px;
 }
 
-.Movie p {
+.Movie p,
+h4 {
     text-align: left;
 }
 
