@@ -7,10 +7,25 @@ class MovieRepository{
   static String _baseURL = MovieAPIManager.movieBaseURL;
   final Dio _jojo = Dio();
   String _getMoviesUrl = '$_baseURL/discover/movie';     
+  String _searchMoviesURL = '$_baseURL/search/movie';
 
-  Future<MovieResponse> getMovies() async {
+  Future<MovieResponse> searchMovies(String query, {int page = 1}) async {
+    var params = {'api_key': _apiKey, 'language': 'en-US', 'page': page, 'query': query}; 
+    try {
+      Response response = await _jojo.get(_searchMoviesURL, queryParameters: params);
+      return MovieResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return MovieResponse.withError("$error");
+    } 
+  }
+
+  Future<MovieResponse> getPopularMovies({int page = 1}) async {
     var params = {'api_key': _apiKey, 'language': 'en-US', 'page': 1}; 
+    return getMovies(params);
+  } 
 
+  Future<MovieResponse> getMovies(var params) async {
     try {
       Response response = await _jojo.get(_getMoviesUrl, queryParameters: params);
       return MovieResponse.fromJson(response.data);
@@ -19,5 +34,6 @@ class MovieRepository{
       return MovieResponse.withError("$error");
     } 
   }
+  
 
 }
