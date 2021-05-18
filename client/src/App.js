@@ -1,11 +1,21 @@
-import "./App.css";
-import React from "react";
+import './App.css';
+import React from 'react';
 
-import Header from "./components/Header";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Header from './components/assets/Header';
+import Search from './components/pages/SearchPage';
+import ProfilePage from './components/pages/ProfilePage';
 
 const App = () => (
-  <div className="App">
-    <Header />
+  <div className='App'>
+    <Router>
+      <Header />
+      <Switch>
+        <Route exact path='/' component={Search} />
+        <Route path='/profile' component={ProfilePage} />
+      </Switch>
+    </Router>
   </div>
 );
 

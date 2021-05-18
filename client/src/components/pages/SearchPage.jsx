@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-import SearchIcon from "@material-ui/icons/Search";
-import Movie from "./Movie";
+import SearchIcon from '@material-ui/icons/Search';
+import Movie from '../assets/Movie';
 
 const Search = () => {
   const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   useEffect(() => {
     axios
       .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=e9085c32cd25783e01c2ae6ef814c537&language=en-US&page=1"
+        'https://api.themoviedb.org/3/movie/popular?api_key=e9085c32cd25783e01c2ae6ef814c537&language=en-US&page=1'
       )
       .then((res) => setMovies(res.data.results));
   }, []);
@@ -24,32 +24,32 @@ const Search = () => {
   };
   return (
     <>
-      <div className="Title">
+      <div className='Title'>
         <h1>MyMovieList</h1>
         <p>
           Find movies and keep track and of what you’ve watched and plan to
           watch.
         </p>
       </div>
-      <form className="Search" onSubmit={search}>
+      <form className='Search' onSubmit={search}>
         <input
-          type="text"
+          type='text'
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search for a movie"
+          placeholder='Search for a movie'
         />
         <SearchIcon
           onClick={search}
           style={{
-            position: "relative",
+            position: 'relative',
             top: 7.5,
             right: 35,
-            cursor: "pointer",
+            cursor: 'pointer',
           }}
         />
       </form>
-      <div className="content">
-        <div className="Movies-container">
+      <div className='content'>
+        <div className='Movies-container'>
           {movies.map((movieInfo) => (
             <Movie
               key={movieInfo.id}

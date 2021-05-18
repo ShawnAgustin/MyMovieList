@@ -5,13 +5,14 @@
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: aliceblue;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .App {
@@ -19,7 +20,7 @@ code {
 }
 
 .App-header {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     /* min-height: 100vh; */
     display: flex;
     align-items: center;
@@ -49,9 +50,10 @@ h1 {
 
 .Search input {
     text-decoration: none;
-    min-width: 60vw;
     border-radius: 20px;
+    width: 60vw;
     height: 4vh;
+    min-height: 4vh;
     font-size: calc(10px + 0.5vmin);
     padding-left: 15px;
     outline: none;
@@ -68,14 +70,10 @@ input {
     text-decoration: none;
 }
 
-.content {
-    /* justify-content: center; */
-}
-
 .Movies-container {
     margin: 0 auto;
     display: flex;
-    max-width: 70vw;
+    max-width: 70%;
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
@@ -105,4 +103,36 @@ h4 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.MiniMovie {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.253);
+}
+
+.MiniMovie .content {
+    margin-top: 1%;
+}
+
+.MiniMovie .No-image {
+    height: 75px;
+    width: 50px;
+    float: left;
+}
+
+.MiniMovie h4 {
+    float: left;
+    margin-left: 1%;
+}
+
+.MiniMovie p {
+    float: right;
+    margin-left: auto;
+}
+
+.Mini-ratings p {
+    margin-left: 5%;
 }
