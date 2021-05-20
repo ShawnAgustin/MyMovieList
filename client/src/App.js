@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/assets/Header';
 import Search from './components/pages/SearchPage';
 import ProfilePage from './components/pages/ProfilePage';
-import InfoCard from './components/assets/InfoCard';
 
 const App = () => (
   <div className='App'>

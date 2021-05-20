@@ -151,15 +151,39 @@ h4 {
 }
 
 .InfoCard {
-    z-index: 100;
+    z-index: 10;
     position: fixed;
     margin: 0;
     padding: 0;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 300px;
+    width: 45%;
+    height: 45%;
     background-color: white;
     border-radius: 20px;
+}
+
+.add {
+    position: relative;
+    float: bottom;
+}
+
+.InfoCard img {
+    position: relative;
+    height: 70%;
+    float: left;
+    padding: 5%;
+}
+
+.InfoCard .content {
+    padding: 3%;
+}
+
+.InfoCard h1 {
+    line-height: 100%;
+}
+
+.InfoCard p {
+    height: 20%;
 }
