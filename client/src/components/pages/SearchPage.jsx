@@ -14,6 +14,7 @@ const Search = () => {
       )
       .then((res) => setMovies(res.data.results));
   }, []);
+
   const search = (event) => {
     event.preventDefault();
     axios
@@ -56,6 +57,7 @@ const Search = () => {
               title={movieInfo.title}
               posterPath={movieInfo.poster_path}
               voteAverage={movieInfo.vote_average}
+              id={movieInfo.id}
             />
           ))}
         </div>
