@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -82,9 +83,9 @@ input {
 }
 
 .Movie {
-    padding: 20px;
-    max-width: 200px;
     position: relative;
+    max-width: 200px;
+    margin: 1%;
 }
 
 .Movie p,
@@ -93,8 +94,6 @@ h4 {
 }
 
 .Movie img {
-    max-height: 300px;
-    max-width: 200px;
     height: 300px;
     width: 200px;
 }
@@ -153,15 +152,20 @@ h4 {
 .InfoCard {
     z-index: 10;
     position: fixed;
+    display: flex;
     margin: 0;
     padding: 0;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 45%;
-    height: 45%;
+    max-width: 45%;
+    max-height: 45%;
+    min-width: 20%;
+    min-height: 20%;
+    height: 100%;
     background-color: white;
     border-radius: 20px;
+    box-shadow: 5px 10px 50px;
 }
 
 .add {
@@ -169,21 +173,52 @@ h4 {
     float: bottom;
 }
 
-.InfoCard img {
-    position: relative;
-    height: 70%;
-    float: left;
-    padding: 5%;
+.InfoCard .image {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.InfoCard .image img {
+    max-height: 400px;
+    padding: 20px;
+    height: 100%;
 }
 
 .InfoCard .content {
-    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    position: relative;
 }
 
 .InfoCard h1 {
-    line-height: 100%;
+    float: left;
+    line-height: 90%;
+    margin: 5% 0;
+    text-align: left;
 }
 
-.InfoCard p {
-    height: 20%;
+.InfoCard .content p {
+    text-align: left;
+    position: relative;
+    max-height: 35%;
+    overflow: auto;
+    padding-right: 10%;
+}
+
+.InfoCard .Rating {
+    font-weight: 700;
+    float: left;
+    margin-bottom: 3%;
+}
+
+.InfoCard .status {
+    width: 60%;
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    margin-bottom: 5%;
 }

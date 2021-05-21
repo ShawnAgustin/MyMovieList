@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
-import AddBoxIcon from '@material-ui/icons/AddBoxOutlined';
 
 import axios from 'axios';
 
@@ -18,32 +17,28 @@ const InfoCard = (props) => {
   }, []);
   return trigger ? (
     <div className='InfoCard'>
-      <CloseIcon
-        onClick={() => setTrigger(false)}
-        style={{
-          cursor: 'pointer',
-          float: 'right',
-          right: '10',
-          top: '5',
-          position: 'absolute',
-        }}
-      />
-      {data.poster_path ? (
-        <img src={IMG_URL + data.poster_path} alt={data.title} />
-      ) : (
-        <div className='No-image'>
-          <p>No image</p>
-        </div>
-      )}
+      <div className='image'>
+        {data.poster_path ? (
+          <img src={IMG_URL + data.poster_path} alt={data.title} />
+        ) : null}
+      </div>
       <div className='content'>
-        <h1>{data.title}</h1>
-        <br />
-        {data.vote_average}
-        <br />
-        <p>{data.overview}</p>
-        <AddBoxIcon
-          style={{ margin: 'auto', bottom: 10, position: 'absolute' }}
+        <CloseIcon
+          onClick={() => setTrigger(false)}
+          style={{
+            cursor: 'pointer',
+            float: 'right',
+            right: '20',
+            top: '15',
+            position: 'absolute',
+          }}
         />
+        <h1>{data.title}</h1>
+        <div className='Rating'>TMDB Rating: {data.vote_average}</div>
+        <p>{data.overview}</p>
+        <div className='status'>
+          <h3>Status:</h3> <h3>Rating:</h3>
+        </div>
       </div>
     </div>
   ) : null;
