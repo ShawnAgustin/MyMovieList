@@ -22,6 +22,8 @@ class MovieCard extends StatelessWidget {
             child: Image.network(
               MovieAPIManager.getPosterURL(movie.posterPath),
               fit: BoxFit.cover,
+              errorBuilder: (context, obj, stackTrace)
+                => _buildNoImage(context) 
             )
           ),
           Container(
@@ -43,6 +45,23 @@ class MovieCard extends StatelessWidget {
               textAlign: TextAlign.left,  
               style: Theme.of(context).textTheme.subtitle1,
             )),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNoImage(BuildContext context){
+    return Container(                   
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.block,
+            color: Theme.of(context).unselectedWidgetColor ,
+            size: ScreenManager.hp(10),
+          ),
+          Text('No Image Found',
+            style: Theme.of(context).textTheme.subtitle1,
+          )
         ],
       ),
     );

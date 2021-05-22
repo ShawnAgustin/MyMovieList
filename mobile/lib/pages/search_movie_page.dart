@@ -34,11 +34,13 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
     return BlocProvider<MoviesBloc>(
       create: (context) => _moviesBloc ,
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            MovieSearchBar(),
-            _buildBody()        
-          ],
+        child: Container( 
+          child: Column(
+            children: [
+              MovieSearchBar(),
+              _buildBody()        
+            ],
+          ),
         ),
       ),
     );
@@ -52,19 +54,13 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
       ),
       child: StreamBuilder<MovieResponse>(
         stream: _moviesBloc.movieController.stream,
-        builder: (context, snapshot){
+        builder: (context, snapshot){   
           if(snapshot.hasData){
-              if(snapshot.data.error.isNotEmpty){
-                
-              print('buildingdasd');
-                return Container(); // TODO: ADD error component
-              } 
-              if(snapshot.data.movies.isEmpty){
-                
-              print('buildingas');
-                return Container(); // TODO: ADD empty state
-              } 
-              print('building'); 
+              if(snapshot.data.error.isNotEmpty){ 
+                return _buildErrorMessage(snapshot.data.error);               } 
+              if(snapshot.data.movies.isEmpty){ 
+                return _buildEmptySearch(); 
+              }  
               return _buildMovieCards(snapshot.data.movies); 
           }
           return Container(); // TODO: ADD empty state
@@ -81,5 +77,40 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
     return Wrap(
       children: movieCards,
     );
+  }
+  Widget _buildErrorWidget(IconData icon, String message){
+    return Container( 
+      height: ScreenManager.hp(72.5), 
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: ScreenManager.hp(2.5)),
+            child: Icon(icon,
+              color: Theme.of(context).unselectedWidgetColor,
+              size: ScreenManager.wp(25),
+            ),
+          ), 
+          Text("$message",          
+            style: Theme.of(context).textTheme.subtitle1,
+            textAlign: TextAlign.center,
+          )
+        ],
+      )
+    );
+  }
+  Widget _buildErrorMessage(String errorMsg){ 
+    return _buildErrorWidget(
+      Icons.error_outline,
+      'Error: $errorMsg');
+  }
+
+  Widget _buildEmptySearch(){
+    return _buildErrorWidget(
+      Icons.search_off_rounded,
+      'No results found.');
   }
 }
