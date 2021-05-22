@@ -7,11 +7,14 @@ import 'package:weeb_dev_my_movie_list/util/helpers/screen_manager.dart';
 class Initializer {
   
   static void initializeManagers() async {  
-    WidgetsFlutterBinding.ensureInitialized();  
-    await FlutterConfig.loadEnvVariables();
     ScreenManager(); 
     MovieAPIManager();
     EnvironmentManager(); 
   } 
+
+  static Future<void> initializeEnvironmentConfig() async {
+    WidgetsFlutterBinding.ensureInitialized();  
+    await FlutterConfig.loadEnvVariables();
+  }
 
 }
