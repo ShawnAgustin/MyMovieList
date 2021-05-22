@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart'; 
-import 'package:weeb_dev_my_movie_list/pages/profile.dart';
-import 'package:weeb_dev_my_movie_list/pages/search_movie.dart'; 
+import 'package:flutter/material.dart';
+import 'package:weeb_dev_my_movie_list/pages/profile_page.dart';
+import 'package:weeb_dev_my_movie_list/pages/search_movie_page.dart';  
 
-class Home extends StatefulWidget {
-  Home();
+class HomePage extends StatefulWidget {
+  HomePage();
 
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> { 
+class _HomeState extends State<HomePage> { 
   
   final List<Tab> _tabs = [
     Tab(icon: Icon(Icons.search,),),
