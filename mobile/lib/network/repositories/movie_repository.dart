@@ -11,23 +11,17 @@ class MovieRepository{
 
   Future<MovieResponse> searchMovies(String query, {int page = 1}) async {
     var params = {'api_key': _apiKey, 'language': 'en-US', 'page': page, 'query': query}; 
-    try {
-      Response response = await _jojo.get(_searchMoviesURL, queryParameters: params);
-      return MovieResponse.fromJson(response.data);
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
-      return MovieResponse.withError("$error");
-    } 
+    return getMovies(_searchMoviesURL, params);
   }
 
   Future<MovieResponse> getPopularMovies({int page = 1}) async {
-    var params = {'api_key': _apiKey, 'language': 'en-US', 'page': 1}; 
-    return getMovies(params);
+    var params = {'api_key': _apiKey, 'language': 'en-US', 'page': page}; 
+    return getMovies(_getMoviesUrl, params);
   } 
 
-  Future<MovieResponse> getMovies(var params) async {
+  Future<MovieResponse> getMovies(String url, var params) async {
     try {
-      Response response = await _jojo.get(_getMoviesUrl, queryParameters: params);
+      Response response = await _jojo.get(url, queryParameters: params);
       return MovieResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
