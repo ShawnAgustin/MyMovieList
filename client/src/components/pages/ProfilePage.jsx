@@ -36,6 +36,15 @@ const ProfilePage = () => {
         setComp((curr) => [...curr, data]);
       }
     }
+
+    setPtw((curr) =>
+      curr.sort((a, b) => (a.voteAverage < b.voteAverage ? 1 : -1))
+    );
+    setComp((curr) =>
+      curr.sort((a, b) =>
+        parseFloat(a.userScore, 2) < parseFloat(b.userScore, 2) ? 1 : -1
+      )
+    );
   }, []);
 
   return (

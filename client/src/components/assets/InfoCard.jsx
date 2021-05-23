@@ -111,7 +111,7 @@ const InfoCard = (props) => {
               id='rating'
               disabled={completed}
               value={rating}
-              onChange={(e) => setRating(e.target.value)}
+              onChange={(e) => setRating(parseFloat(e.target.value, 2))}
             >
               <option value='none'>-----</option>
               <option value='1'>1</option>
