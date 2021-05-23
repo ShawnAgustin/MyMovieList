@@ -10,8 +10,12 @@ const InfoCard = (props) => {
   const [rating, setRating] = useState();
   const [status, setStatus] = useState();
   const [completed, setCompleted] = useState(true);
+  const [title, setTitle] = useState();
+  const [voteAverage, setVoteAverage] = useState();
 
   const handleStatusChange = (stat) => {
+    setTitle(data.title);
+    setVoteAverage(data.vote_average);
     if (stat === 'completed') {
       setCompleted(false);
       setStatus('completed');
@@ -28,10 +32,6 @@ const InfoCard = (props) => {
     setRating('null');
   };
 
-  const handleRatingChange = (rate) => {
-    setRating(rate);
-  };
-
   useEffect(() => {
     if (status === 'ptw' || status === 'completed') {
       localStorage.setItem(
@@ -40,27 +40,13 @@ const InfoCard = (props) => {
           status,
           rating,
           completed,
+          title,
+          voteAverage,
+          id,
         })
       );
     }
   }, [status, rating]);
-
-  // useEffect(() => {
-  //   return () => {
-  //     if (status === 'ptw' || status === 'completed') {
-  //       localStorage.setItem(
-  //         id,
-  //         JSON.stringify({
-  //           status,
-  //           rating,
-  //           completed,
-  //           title: data.title,
-  //           userRating: data.vote_average,
-  //         })
-  //       );
-  //     }
-  //   };
-  // });
 
   useEffect(() => {
     const details = JSON.parse(localStorage.getItem(id));
@@ -68,6 +54,8 @@ const InfoCard = (props) => {
       setStatus(details.status);
       setRating(details.rating);
       setCompleted(details.completed);
+      setTitle(details.title);
+      setVoteAverage(details.voteAverage);
     }
   }, []);
 
@@ -119,9 +107,9 @@ const InfoCard = (props) => {
               id='rating'
               disabled={completed}
               value={rating}
-              onChange={(e) => handleRatingChange(e.target.value)}
+              onChange={(e) => setRating(e.target.value)}
             >
-              <option value='none'>--------</option>
+              <option value='none'>-----</option>
               <option value='1'>1</option>
               <option value='2'>2</option>
               <option value='3'>3</option>

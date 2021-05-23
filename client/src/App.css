@@ -229,7 +229,7 @@ h4 {
 /* Pair of status and selector */
 
 .InfoCard .status {
-    width: 60%;
+    width: 45%;
     display: flex;
     margin: 5% 0;
     bottom: 0;
