@@ -12,10 +12,12 @@ const InfoCard = (props) => {
   const [completed, setCompleted] = useState(true);
   const [title, setTitle] = useState();
   const [voteAverage, setVoteAverage] = useState();
+  const [pp, setPp] = useState();
 
   const handleStatusChange = (stat) => {
     setTitle(data.title);
     setVoteAverage(data.vote_average);
+    setPp(data.poster_path);
     if (stat === 'completed') {
       setCompleted(false);
       setStatus('completed');
@@ -43,6 +45,7 @@ const InfoCard = (props) => {
           title,
           voteAverage,
           id,
+          pp,
         })
       );
     }
@@ -56,6 +59,7 @@ const InfoCard = (props) => {
       setCompleted(details.completed);
       setTitle(details.title);
       setVoteAverage(details.voteAverage);
+      setPp(details.pp);
     }
   }, []);
 

@@ -24,14 +24,17 @@ const useStyles = makeStyles((theme) => ({
 const ProfilePage = () => {
   const classes = useStyles();
 
-  const [list, setList] = useState([]);
+  const [ptw, setPtw] = useState([]);
+  const [comp, setComp] = useState([]);
 
   useEffect(() => {
     for (let i = 0; i < localStorage.length; i += 1) {
-      console.log(
-        localStorage.key(i),
-        localStorage.getItem(localStorage.key(i))
-      );
+      const data = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      if (data.status === 'ptw') {
+        setPtw((curr) => [...curr, data]);
+      } else {
+        setComp((curr) => [...curr, data]);
+      }
     }
   }, []);
 
@@ -47,12 +50,15 @@ const ProfilePage = () => {
           >
             <Typography className={classes.heading}>Plan to watch</Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <MiniMovie title='test movie' posterPath='' voteAverage='8.9' />
-          </AccordionDetails>
-          <AccordionDetails>
-            <MiniMovie title='test movie 2' posterPath='' voteAverage='6.5' />
-          </AccordionDetails>
+          {ptw.map((data) => (
+            <AccordionDetails>
+              <MiniMovie
+                title={data.title}
+                posterPath={data.pp}
+                voteAverage={data.voteAverage}
+              />
+            </AccordionDetails>
+          ))}
         </Accordion>
       </div>
       <div className={classes.root}>
@@ -64,14 +70,16 @@ const ProfilePage = () => {
           >
             <Typography className={classes.heading}>Completed</Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <MiniMovie
-              title='test movie 3'
-              posterPath=''
-              voteAverage='9.2'
-              userScore='7'
-            />
-          </AccordionDetails>
+          {comp.map((data) => (
+            <AccordionDetails>
+              <MiniMovie
+                title={data.title}
+                posterPath={data.pp}
+                voteAverage={data.voteAverage}
+                userScore={data.rating}
+              />
+            </AccordionDetails>
+          ))}
         </Accordion>
       </div>
     </>
