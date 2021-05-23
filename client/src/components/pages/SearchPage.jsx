@@ -42,9 +42,9 @@ const Search = () => {
         <SearchIcon
           onClick={search}
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: 7.5,
-            right: 35,
+            right: '20.5%',
             cursor: 'pointer',
           }}
         />

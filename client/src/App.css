@@ -48,15 +48,17 @@ h1 {
 }
 
 .Search {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
 }
 
 .Search input {
     text-decoration: none;
     border-radius: 20px;
-    width: 60vw;
-    height: 4vh;
-    min-height: 4vh;
+    width: 60%;
+    height: 40px;
     font-size: calc(10px + 0.5vmin);
     padding-left: 15px;
     outline: none;
@@ -73,11 +75,15 @@ input {
     text-decoration: none;
 }
 
+.content {
+    width: 100%;
+}
+
 .Movies-container {
     margin: 0 auto;
     display: flex;
-    max-width: 70%;
-    justify-content: center;
+    max-width: 60%;
+    justify-content: space-between;
     align-content: center;
     flex-wrap: wrap;
 }
@@ -142,6 +148,7 @@ h4 {
 .backfilter {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     z-index: 1000;
@@ -151,18 +158,15 @@ h4 {
 
 .InfoCard {
     z-index: 10;
-    position: fixed;
+    position: absolute;
     display: flex;
     margin: 0;
     padding: 0;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    max-width: 80%;
-    max-height: 60%;
-    min-width: 20%;
-    min-height: 20%;
-    height: 100%;
+    width: 900px;
+    height: 500px;
     background-color: white;
     border-radius: 20px;
     box-shadow: 5px 10px 50px;
@@ -181,7 +185,7 @@ h4 {
 
 .InfoCard .image img {
     max-height: 600px;
-    padding: 30px;
+    padding: 35px;
     height: 100%;
 }
 
@@ -204,7 +208,8 @@ h4 {
 .InfoCard .content p {
     text-align: left;
     position: relative;
-    height: 35%;
+    height: 25%;
+    max-height: 50%;
     overflow: auto;
     padding-right: 10%;
 }
@@ -215,11 +220,25 @@ h4 {
     margin-bottom: 3%;
 }
 
+.InfoCard .selection {
+    width: 100%;
+    display: flex;
+}
+
+
+/* Pair of status and selector */
+
 .InfoCard .status {
     width: 60%;
-    margin-top: 5%;
     display: flex;
-    justify-content: space-between;
+    margin: 5% 0;
     bottom: 0;
-    margin-bottom: 5%;
+}
+
+.InfoCard select {
+    border-radius: 20px;
+    font-weight: bold;
+    height: 30px;
+    outline: none;
+    margin-left: 10px;
 }

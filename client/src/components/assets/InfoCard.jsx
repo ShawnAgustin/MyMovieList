@@ -21,10 +21,11 @@ const InfoCard = (props) => {
 
     if (stat === 'null') {
       localStorage.removeItem(id);
+      setStatus('null');
     } else {
       setStatus('ptw');
-      setRating('null');
     }
+    setRating('null');
   };
 
   const handleRatingChange = (rate) => {
@@ -33,9 +34,33 @@ const InfoCard = (props) => {
 
   useEffect(() => {
     if (status === 'ptw' || status === 'completed') {
-      localStorage.setItem(id, JSON.stringify({ status, rating, completed }));
+      localStorage.setItem(
+        id,
+        JSON.stringify({
+          status,
+          rating,
+          completed,
+        })
+      );
     }
   }, [status, rating]);
+
+  // useEffect(() => {
+  //   return () => {
+  //     if (status === 'ptw' || status === 'completed') {
+  //       localStorage.setItem(
+  //         id,
+  //         JSON.stringify({
+  //           status,
+  //           rating,
+  //           completed,
+  //           title: data.title,
+  //           userRating: data.vote_average,
+  //         })
+  //       );
+  //     }
+  //   };
+  // });
 
   useEffect(() => {
     const details = JSON.parse(localStorage.getItem(id));
@@ -44,7 +69,7 @@ const InfoCard = (props) => {
       setRating(details.rating);
       setCompleted(details.completed);
     }
-  });
+  }, []);
 
   useEffect(() => {
     axios
@@ -53,6 +78,7 @@ const InfoCard = (props) => {
       )
       .then((res) => setData(res.data));
   }, []);
+
   return trigger ? (
     <div className='InfoCard'>
       <div className='image'>
@@ -74,36 +100,40 @@ const InfoCard = (props) => {
         <h1>{data.title}</h1>
         <div className='Rating'>TMDB Rating: {data.vote_average}</div>
         <p>{data.overview}</p>
-        <div className='status'>
-          <h3>Status:</h3>
-          <select
-            id='status'
-            onChange={(e) => handleStatusChange(e.target.value)}
-            value={status}
-          >
-            <option value='null'>--------</option>
-            <option value='ptw'>Plan to watch</option>
-            <option value='completed'>Completed</option>
-          </select>
-          <h3>Rating:</h3>
-          <select
-            id='rating'
-            disabled={completed}
-            value={rating}
-            onChange={(e) => handleRatingChange(e.target.value)}
-          >
-            <option value='none'>--------</option>
-            <option value='1'>1</option>
-            <option value='2'>2</option>
-            <option value='3'>3</option>
-            <option value='4'>4</option>
-            <option value='5'>5</option>
-            <option value='6'>6</option>
-            <option value='7'>7</option>
-            <option value='8'>8</option>
-            <option value='9'>9</option>
-            <option value='10'>10</option>
-          </select>
+        <div className='selection'>
+          <div className='status'>
+            <h3>Status:</h3>
+            <select
+              id='status'
+              onChange={(e) => handleStatusChange(e.target.value)}
+              value={status}
+            >
+              <option value='null'>--------</option>
+              <option value='ptw'>Plan to watch</option>
+              <option value='completed'>Completed</option>
+            </select>
+          </div>
+          <div className='status'>
+            <h3>My Score:</h3>
+            <select
+              id='rating'
+              disabled={completed}
+              value={rating}
+              onChange={(e) => handleRatingChange(e.target.value)}
+            >
+              <option value='none'>--------</option>
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='4'>4</option>
+              <option value='5'>5</option>
+              <option value='6'>6</option>
+              <option value='7'>7</option>
+              <option value='8'>8</option>
+              <option value='9'>9</option>
+              <option value='10'>10</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>

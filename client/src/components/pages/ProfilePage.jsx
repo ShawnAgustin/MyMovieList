@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -23,6 +23,17 @@ const useStyles = makeStyles((theme) => ({
 
 const ProfilePage = () => {
   const classes = useStyles();
+
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    for (let i = 0; i < localStorage.length; i += 1) {
+      console.log(
+        localStorage.key(i),
+        localStorage.getItem(localStorage.key(i))
+      );
+    }
+  }, []);
 
   return (
     <>
