@@ -33,7 +33,7 @@ const InfoCard = (props) => {
 
   useEffect(() => {
     if (status === 'ptw' || status === 'completed') {
-      localStorage.setItem(id, JSON.stringify({ status, rating }));
+      localStorage.setItem(id, JSON.stringify({ status, rating, completed }));
     }
   }, [status, rating]);
 
@@ -42,6 +42,7 @@ const InfoCard = (props) => {
     if (details !== null) {
       setStatus(details.status);
       setRating(details.rating);
+      setCompleted(details.completed);
     }
   });
 
@@ -78,6 +79,7 @@ const InfoCard = (props) => {
           <select
             id='status'
             onChange={(e) => handleStatusChange(e.target.value)}
+            value={status}
           >
             <option value='null'>--------</option>
             <option value='ptw'>Plan to watch</option>
@@ -87,6 +89,7 @@ const InfoCard = (props) => {
           <select
             id='rating'
             disabled={completed}
+            value={rating}
             onChange={(e) => handleRatingChange(e.target.value)}
           >
             <option value='none'>--------</option>
