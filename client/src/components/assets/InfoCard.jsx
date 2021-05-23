@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
-
 import axios from 'axios';
 
 const InfoCard = (props) => {
@@ -16,7 +15,6 @@ const InfoCard = (props) => {
     if (stat === 'completed') {
       setCompleted(false);
       setStatus('completed');
-      setRating('none');
       return;
     }
     setCompleted(true);
@@ -34,8 +32,18 @@ const InfoCard = (props) => {
   };
 
   useEffect(() => {
-    localStorage.setItem(id, JSON.stringify({ status, rating }));
+    if (status === 'ptw' || status === 'completed') {
+      localStorage.setItem(id, JSON.stringify({ status, rating }));
+    }
   }, [status, rating]);
+
+  useEffect(() => {
+    const details = JSON.parse(localStorage.getItem(id));
+    if (details !== null) {
+      setStatus(details.status);
+      setRating(details.rating);
+    }
+  });
 
   useEffect(() => {
     axios
