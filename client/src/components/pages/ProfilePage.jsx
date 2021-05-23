@@ -51,7 +51,7 @@ const ProfilePage = () => {
             <Typography className={classes.heading}>Plan to watch</Typography>
           </AccordionSummary>
           {ptw.map((data) => (
-            <AccordionDetails>
+            <AccordionDetails key={data.id}>
               <MiniMovie
                 title={data.title}
                 posterPath={data.pp}
@@ -71,7 +71,7 @@ const ProfilePage = () => {
             <Typography className={classes.heading}>Completed</Typography>
           </AccordionSummary>
           {comp.map((data) => (
-            <AccordionDetails>
+            <AccordionDetails key={data.id}>
               <MiniMovie
                 title={data.title}
                 posterPath={data.pp}
