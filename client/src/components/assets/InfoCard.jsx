@@ -8,6 +8,35 @@ const InfoCard = (props) => {
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
   const [data, setData] = useState({});
+  const [rating, setRating] = useState();
+  const [status, setStatus] = useState();
+  const [completed, setCompleted] = useState(true);
+
+  const handleStatusChange = (stat) => {
+    if (stat === 'completed') {
+      setCompleted(false);
+      setStatus('completed');
+      setRating('none');
+      return;
+    }
+    setCompleted(true);
+
+    if (stat === 'null') {
+      localStorage.removeItem(id);
+    } else {
+      setStatus('ptw');
+      setRating('null');
+    }
+  };
+
+  const handleRatingChange = (rate) => {
+    setRating(rate);
+  };
+
+  useEffect(() => {
+    localStorage.setItem(id, JSON.stringify({ status, rating }));
+  }, [status, rating]);
+
   useEffect(() => {
     axios
       .get(
@@ -37,7 +66,33 @@ const InfoCard = (props) => {
         <div className='Rating'>TMDB Rating: {data.vote_average}</div>
         <p>{data.overview}</p>
         <div className='status'>
-          <h3>Status:</h3> <h3>Rating:</h3>
+          <h3>Status:</h3>
+          <select
+            id='status'
+            onChange={(e) => handleStatusChange(e.target.value)}
+          >
+            <option value='null'>--------</option>
+            <option value='ptw'>Plan to watch</option>
+            <option value='completed'>Completed</option>
+          </select>
+          <h3>Rating:</h3>
+          <select
+            id='rating'
+            disabled={completed}
+            onChange={(e) => handleRatingChange(e.target.value)}
+          >
+            <option value='none'>--------</option>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+            <option value='5'>5</option>
+            <option value='6'>6</option>
+            <option value='7'>7</option>
+            <option value='8'>8</option>
+            <option value='9'>9</option>
+            <option value='10'>10</option>
+          </select>
         </div>
       </div>
     </div>

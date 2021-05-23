@@ -158,8 +158,8 @@ h4 {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    max-width: 45%;
-    max-height: 45%;
+    max-width: 80%;
+    max-height: 60%;
     min-width: 20%;
     min-height: 20%;
     height: 100%;
@@ -180,8 +180,8 @@ h4 {
 }
 
 .InfoCard .image img {
-    max-height: 400px;
-    padding: 20px;
+    max-height: 600px;
+    padding: 30px;
     height: 100%;
 }
 
@@ -198,12 +198,13 @@ h4 {
     line-height: 90%;
     margin: 5% 0;
     text-align: left;
+    padding-right: 5%;
 }
 
 .InfoCard .content p {
     text-align: left;
     position: relative;
-    max-height: 35%;
+    height: 35%;
     overflow: auto;
     padding-right: 10%;
 }
