@@ -1,0 +1,1 @@
+-keep class com.example.weeb_dev_my_movie_list.BuildConfig { *; }

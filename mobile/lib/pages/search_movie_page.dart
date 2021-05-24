@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:weeb_dev_my_movie_list/bloc/MoviesBloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; 
+import 'package:weeb_dev_my_movie_list/bloc/movies_bloc/movies_bloc.dart';
 import 'package:weeb_dev_my_movie_list/models/movie.dart';
 import 'package:weeb_dev_my_movie_list/models/response/movie_response.dart'; 
 import 'package:weeb_dev_my_movie_list/util/helpers/screen_manager.dart';
 import 'package:weeb_dev_my_movie_list/widgets/movie_cards.dart';
+import 'package:weeb_dev_my_movie_list/widgets/movie_search_bar.dart';
 
 class SearchMoviePage extends StatefulWidget {
   SearchMoviePage({Key key}) : super(key: key);
@@ -18,8 +20,7 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
   @override
   void initState() { 
     super.initState();
-    _moviesBloc = MoviesBloc();
-    _moviesBloc.getMovies();
+    _moviesBloc = MoviesBloc(); 
   }
   
   @override
@@ -30,26 +31,41 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
 
   @override
   Widget build(BuildContext context) { 
-    return SingleChildScrollView(
-      child: Container( 
-        padding: EdgeInsets.symmetric(
-          horizontal: ScreenManager.wp(5),
-          vertical: ScreenManager.hp(2.5)
+    return BlocProvider<MoviesBloc>(
+      create: (context) => _moviesBloc ,
+      child: SingleChildScrollView(
+        child: Container( 
+          child: Column(
+            children: [
+              MovieSearchBar(),
+              _buildBody()        
+            ],
+          ),
         ),
-        child: StreamBuilder<MovieResponse>(
-          stream: _moviesBloc.movieController.stream,
-          builder: (context, snapshot){
-            if(snapshot.hasData){
-                if(snapshot.data.error.isNotEmpty)
-                  return Container();
-                if(snapshot.data.movies.isEmpty)
-                  return Container(); 
-                return _buildMovieCards(snapshot.data.movies); 
-            }
-            return Container();
-          },
-        )
       ),
+    );
+  }
+
+
+  Widget _buildBody(){
+    return Container( 
+      padding: EdgeInsets.symmetric(
+        horizontal: ScreenManager.wp(5), 
+      ),
+      child: StreamBuilder<MovieResponse>(
+        stream: _moviesBloc.movieController.stream,
+        builder: (context, snapshot){   
+          if(snapshot.hasData){
+              if(snapshot.data.error.isNotEmpty){ 
+                return _buildErrorMessage(snapshot.data.error);               } 
+              if(snapshot.data.movies.isEmpty){ 
+                return _buildEmptySearch(); 
+              }  
+              return _buildMovieCards(snapshot.data.movies); 
+          }
+          return Container(); // TODO: ADD empty state
+        },
+      )
     );
   }
 
@@ -57,10 +73,44 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
     List<Widget> movieCards = [];
     movies.forEach((element) { 
       movieCards.add(MovieCard(element));
-    });
-
+    }); 
     return Wrap(
       children: movieCards,
     );
+  }
+  Widget _buildErrorWidget(IconData icon, String message){
+    return Container( 
+      height: ScreenManager.hp(72.5), 
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: ScreenManager.hp(2.5)),
+            child: Icon(icon,
+              color: Theme.of(context).unselectedWidgetColor,
+              size: ScreenManager.wp(25),
+            ),
+          ), 
+          Text("$message",          
+            style: Theme.of(context).textTheme.subtitle1,
+            textAlign: TextAlign.center,
+          )
+        ],
+      )
+    );
+  }
+  Widget _buildErrorMessage(String errorMsg){ 
+    return _buildErrorWidget(
+      Icons.error_outline,
+      'Error: $errorMsg');
+  }
+
+  Widget _buildEmptySearch(){
+    return _buildErrorWidget(
+      Icons.search_off_rounded,
+      'No results found.');
   }
 }
