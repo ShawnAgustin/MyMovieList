@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:weeb_dev_my_movie_list/models/movie.dart';
 import 'package:weeb_dev_my_movie_list/network/api_managers/movie_api_manager.dart';
@@ -31,10 +32,10 @@ class _MovieWatchlistItemState extends State<MovieWatchlistItem> {
                       vertical: ScreenManager.hp(1),
                       horizontal: ScreenManager.wp(1.25)),
                   width: ScreenManager.wp(20),
-                  child: Image.network(
-                    MovieAPIManager.getPosterURL(widget.movie.posterPath),
+                  child: CachedNetworkImage(
+                    imageUrl: MovieAPIManager.getPosterURL(widget.movie.posterPath),
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
+                    errorWidget: (context, error, stackTrace) {
                       return _buildNoImage(context);
                     },
                   ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:weeb_dev_my_movie_list/models/movie.dart';
 import 'package:weeb_dev_my_movie_list/network/api_managers/movie_api_manager.dart';
@@ -17,11 +18,11 @@ class MovieCard extends StatelessWidget {
         children: [
           Container(
               height: ScreenManager.hp(30),
-              child: Image.network(
-                  MovieAPIManager.getPosterURL(movie.posterPath),
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, obj, stackTrace) =>
-                      _buildNoImage(context))),
+              child: CachedNetworkImage(
+                imageUrl: MovieAPIManager.getPosterURL(movie.posterPath), 
+                fit: BoxFit.cover,
+                errorWidget: (context, obj, stackTrace) =>
+                    _buildNoImage(context))),
           Container(
               padding: EdgeInsets.only(
                 top: ScreenManager.hp(1),
