@@ -12,17 +12,18 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  ExpansionListBloc _expansionListBloc;
-  List<bool> isExpandeds = [
-    false,
-    false,
-    false,
-  ];
+  ExpansionListBloc _expansionListBloc; 
 
   @override
   void initState() {
     super.initState();
     _expansionListBloc = ExpansionListBloc(List.filled(4, false));
+  }
+
+  @override
+  void dispose() {
+    _expansionListBloc.dispose();
+    super.dispose();
   }
 
   @override
