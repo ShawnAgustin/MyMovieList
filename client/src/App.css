@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -47,15 +48,17 @@ h1 {
 }
 
 .Search {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
 }
 
 .Search input {
     text-decoration: none;
     border-radius: 20px;
-    width: 60vw;
-    height: 4vh;
-    min-height: 4vh;
+    width: 60%;
+    height: 40px;
     font-size: calc(10px + 0.5vmin);
     padding-left: 15px;
     outline: none;
@@ -72,19 +75,23 @@ input {
     text-decoration: none;
 }
 
+.content {
+    width: 100%;
+}
+
 .Movies-container {
     margin: 0 auto;
     display: flex;
-    max-width: 70%;
-    justify-content: center;
+    max-width: 60%;
+    justify-content: space-evenly;
     align-content: center;
     flex-wrap: wrap;
 }
 
 .Movie {
-    padding: 20px;
-    max-width: 200px;
     position: relative;
+    max-width: 200px;
+    margin: 1%;
 }
 
 .Movie p,
@@ -93,8 +100,6 @@ h4 {
 }
 
 .Movie img {
-    max-height: 300px;
-    max-width: 200px;
     height: 300px;
     width: 200px;
 }
@@ -114,6 +119,11 @@ h4 {
     justify-content: center;
     width: 100%;
     border-top: 1px solid rgba(0, 0, 0, 0.253);
+}
+
+.MiniMovie img {
+    height: 100px;
+    float: left;
 }
 
 .MiniMovie .content {
@@ -143,6 +153,7 @@ h4 {
 .backfilter {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     z-index: 1000;
@@ -151,15 +162,88 @@ h4 {
 }
 
 .InfoCard {
-    z-index: 100;
-    position: fixed;
+    z-index: 10;
+    position: absolute;
+    display: flex;
     margin: 0;
     padding: 0;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 300px;
+    width: 900px;
+    height: 500px;
     background-color: white;
     border-radius: 20px;
+    box-shadow: 5px 10px 50px;
+}
+
+.add {
+    position: relative;
+    float: bottom;
+}
+
+.InfoCard .image {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.InfoCard .image img {
+    max-height: 600px;
+    padding: 35px;
+    height: 100%;
+}
+
+.InfoCard .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    position: relative;
+}
+
+.InfoCard h1 {
+    float: left;
+    line-height: 90%;
+    margin: 5% 0;
+    text-align: left;
+    padding-right: 5%;
+}
+
+.InfoCard .content p {
+    text-align: left;
+    position: relative;
+    height: 25%;
+    max-height: 50%;
+    overflow: auto;
+    padding-right: 10%;
+}
+
+.InfoCard .Rating {
+    font-weight: 700;
+    float: left;
+    margin-bottom: 3%;
+}
+
+.InfoCard .selection {
+    width: 100%;
+    display: flex;
+}
+
+
+/* Pair of status and selector */
+
+.InfoCard .status {
+    width: 45%;
+    display: flex;
+    margin: 5% 0;
+    bottom: 0;
+}
+
+.InfoCard select {
+    border-radius: 20px;
+    font-weight: bold;
+    height: 30px;
+    outline: none;
+    margin-left: 10px;
 }

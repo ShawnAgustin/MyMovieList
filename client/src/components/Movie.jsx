@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import AddBoxIcon from '@material-ui/icons/AddBoxOutlined';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 import InfoCard from './InfoCard';
@@ -9,13 +8,13 @@ const Movie = (props) => {
   const { id, title, posterPath, voteAverage } = props;
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
-  const [info, setInfo] = useState(false);
+  const [opened, setOpened] = useState(false);
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      setInfo(false);
-    }
-  };
+  // const handleKeyPress = (e) => {
+  //   if (e.key === 'Enter') {
+  //     setTrigger(false);
+  //   }
+  // };
 
   return (
     <>
@@ -43,21 +42,21 @@ const Movie = (props) => {
                   margin: 'auto',
                   cursor: 'pointer',
                 }}
-                onClick={() => setInfo(true)}
+                onClick={() => setOpened(true)}
               />
             </p>
           )}
         </div>
       </div>
-      {info ? (
+      {opened ? (
         <div
           className='backfilter'
-          onClick={() => setInfo(false)}
-          onKeyPress={() => handleKeyPress}
-          role='button'
-          tabIndex={0}
+          // onClick={() => setTrigger(false)}
+          // onKeyPress={() => handleKeyPress}
+          // role='button'
+          // tabIndex={0}
         >
-          <InfoCard props={{ id, setInfo }} />
+          <InfoCard id={id} opened={opened} setOpened={setOpened} />
         </div>
       ) : null}
     </>
