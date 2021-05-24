@@ -8,7 +8,7 @@ const Movie = (props) => {
   const { id, title, posterPath, voteAverage } = props;
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
-  const [trigger, setTrigger] = useState(false);
+  const [opened, setOpened] = useState(false);
 
   // const handleKeyPress = (e) => {
   //   if (e.key === 'Enter') {
@@ -42,13 +42,13 @@ const Movie = (props) => {
                   margin: 'auto',
                   cursor: 'pointer',
                 }}
-                onClick={() => setTrigger(true)}
+                onClick={() => setOpened(true)}
               />
             </p>
           )}
         </div>
       </div>
-      {trigger ? (
+      {opened ? (
         <div
           className='backfilter'
           // onClick={() => setTrigger(false)}
@@ -56,7 +56,7 @@ const Movie = (props) => {
           // role='button'
           // tabIndex={0}
         >
-          <InfoCard id={id} trigger={trigger} setTrigger={setTrigger} />
+          <InfoCard id={id} opened={opened} setOpened={setOpened} />
         </div>
       ) : null}
     </>

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import SearchIcon from '@material-ui/icons/Search';
-import Movie from '../assets/Movie';
+import Movie from '../Movie';
 
-const Search = () => {
+const SearchPage = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
   useEffect(() => {
@@ -66,4 +66,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchPage;

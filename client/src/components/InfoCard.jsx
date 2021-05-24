@@ -3,7 +3,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
 
 const InfoCard = (props) => {
-  const { id, trigger, setTrigger } = props;
+  const { id, opened, setOpened } = props;
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
 
   const [data, setData] = useState({});
@@ -29,13 +29,14 @@ const InfoCard = (props) => {
       localStorage.removeItem(id);
       setStatus('null');
     } else {
-      setStatus('ptw');
+      setStatus('planToWatch');
     }
     setRating('null');
   };
 
+  // Listener to whenever the user changes update the localstorage DB
   useEffect(() => {
-    if (status === 'ptw' || status === 'completed') {
+    if (status === 'planToWatch' || status === 'completed') {
       localStorage.setItem(
         id,
         JSON.stringify({
@@ -51,6 +52,7 @@ const InfoCard = (props) => {
     }
   }, [status, rating]);
 
+  // On mount, update the useState with the localStorage DB
   useEffect(() => {
     const details = JSON.parse(localStorage.getItem(id));
     if (details !== null) {
@@ -63,6 +65,7 @@ const InfoCard = (props) => {
     }
   }, []);
 
+  // Get the movie data from the API on mount
   useEffect(() => {
     axios
       .get(
@@ -71,7 +74,7 @@ const InfoCard = (props) => {
       .then((res) => setData(res.data));
   }, []);
 
-  return trigger ? (
+  return opened ? (
     <div className='InfoCard'>
       <div className='image'>
         {data.poster_path ? (
@@ -80,7 +83,7 @@ const InfoCard = (props) => {
       </div>
       <div className='content'>
         <CloseIcon
-          onClick={() => setTrigger(false)}
+          onClick={() => setOpened(false)}
           style={{
             cursor: 'pointer',
             float: 'right',
@@ -101,7 +104,7 @@ const InfoCard = (props) => {
               value={status}
             >
               <option value='null'>--------</option>
-              <option value='ptw'>Plan to watch</option>
+              <option value='planToWatch'>Plan to watch</option>
               <option value='completed'>Completed</option>
             </select>
           </div>

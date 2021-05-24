@@ -7,7 +7,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import MiniMovie from '../assets/MiniMovie';
+import MiniMovie from '../MiniMovie';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,27 +24,25 @@ const useStyles = makeStyles((theme) => ({
 const ProfilePage = () => {
   const classes = useStyles();
 
-  const [ptw, setPtw] = useState([]);
+  const [planToWatch, setplanToWatch] = useState([]);
   const [comp, setComp] = useState([]);
 
+  // Get the localStorage and place them into useStates
   useEffect(() => {
     for (let i = 0; i < localStorage.length; i += 1) {
       const data = JSON.parse(localStorage.getItem(localStorage.key(i)));
-      if (data.status === 'ptw') {
-        setPtw((curr) => [...curr, data]);
+      if (data.status === 'planToWatch') {
+        setplanToWatch((curr) => [...curr, data]);
       } else {
         setComp((curr) => [...curr, data]);
       }
     }
 
-    setPtw((curr) =>
+    // Sort the useStates by votes and by title
+    setplanToWatch((curr) =>
       curr.sort((a, b) => (a.voteAverage < b.voteAverage ? 1 : -1))
     );
-    setComp((curr) =>
-      curr.sort((a, b) =>
-        parseFloat(a.userScore, 2) < parseFloat(b.userScore, 2) ? 1 : -1
-      )
-    );
+    setComp((curr) => curr.sort((a, b) => (a.title > b.title ? 1 : -1)));
   }, []);
 
   return (
@@ -59,7 +57,7 @@ const ProfilePage = () => {
           >
             <Typography className={classes.heading}>Plan to watch</Typography>
           </AccordionSummary>
-          {ptw.map((data) => (
+          {planToWatch.map((data) => (
             <AccordionDetails key={data.id}>
               <MiniMovie
                 title={data.title}
