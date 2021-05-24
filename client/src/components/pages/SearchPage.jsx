@@ -5,12 +5,13 @@ import SearchIcon from '@material-ui/icons/Search';
 import Movie from '../Movie';
 
 const SearchPage = () => {
+  const API_KEY = process.env.REACT_APP_API_KEY;
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
   useEffect(() => {
     axios
       .get(
-        'https://api.themoviedb.org/3/movie/popular?api_key=e9085c32cd25783e01c2ae6ef814c537&language=en-US&page=1'
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
       )
       .then((res) => setMovies(res.data.results));
   }, []);
@@ -19,7 +20,7 @@ const SearchPage = () => {
     event.preventDefault();
     axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=e9085c32cd25783e01c2ae6ef814c537&language=en-US&query=${query}&page=1&include_adult=false`
+        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
       )
       .then((res) => setMovies(res.data.results));
   };

@@ -5,6 +5,7 @@ import axios from 'axios';
 const InfoCard = (props) => {
   const { id, opened, setOpened } = props;
   const IMG_URL = 'https://image.tmdb.org/t/p/w1280';
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
   const [data, setData] = useState({});
   const [rating, setRating] = useState();
@@ -69,7 +70,7 @@ const InfoCard = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=e9085c32cd25783e01c2ae6ef814c537&language=en-U`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-U`
       )
       .then((res) => setData(res.data));
   }, []);
