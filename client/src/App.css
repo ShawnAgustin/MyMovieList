@@ -170,8 +170,8 @@ h4 {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 900px;
-    height: 500px;
+    width: 1200px;
+    height: 600px;
     background-color: white;
     border-radius: 20px;
     box-shadow: 5px 10px 50px;
@@ -204,8 +204,8 @@ h4 {
 
 .InfoCard h1 {
     float: left;
-    line-height: 90%;
-    margin: 5% 0;
+    line-height: 105%;
+    margin: 5% 0 2% 0;
     text-align: left;
     padding-right: 5%;
 }
@@ -213,14 +213,14 @@ h4 {
 .InfoCard .content p {
     text-align: left;
     position: relative;
-    height: 25%;
-    max-height: 50%;
+    max-height: 30%;
     overflow: auto;
     padding-right: 10%;
 }
 
 .InfoCard .Rating {
-    font-weight: 700;
+    color: grey;
+    font-weight: 200;
     float: left;
     margin-bottom: 3%;
 }
@@ -236,7 +236,7 @@ h4 {
 .InfoCard .status {
     width: 45%;
     display: flex;
-    margin: 5% 0;
+    margin-bottom: 2%;
     bottom: 0;
 }
 
@@ -246,4 +246,14 @@ h4 {
     height: 30px;
     outline: none;
     margin-left: 10px;
+    padding: 0 10px;
+}
+
+.profilePage {
+    text-align: left;
+}
+
+.profilePage h1 {
+    width: 70%;
+    margin: auto;
 }
