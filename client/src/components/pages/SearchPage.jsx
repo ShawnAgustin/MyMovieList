@@ -70,7 +70,7 @@ const SearchPage = () => {
       <div className={classes.root}>
         <Grid container spacing={2}>
           {movies.map((movieInfo) => (
-            <Grid item xs={2} key={movieInfo.id} align='center'>
+            <Grid item xs={3} key={movieInfo.id} align='center'>
               <Movie
                 title={movieInfo.title}
                 posterPath={movieInfo.poster_path}
