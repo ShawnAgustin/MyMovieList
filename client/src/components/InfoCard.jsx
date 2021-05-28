@@ -76,60 +76,68 @@ const InfoCard = (props) => {
   }, []);
 
   return opened ? (
-    <div className='InfoCard'>
-      <div className='image'>
-        {data.poster_path ? (
-          <img src={IMG_URL + data.poster_path} alt={data.title} />
-        ) : null}
-      </div>
-      <div className='content'>
-        <CloseIcon
-          onClick={() => setOpened(false)}
-          style={{
-            cursor: 'pointer',
-            float: 'right',
-            right: '20',
-            top: '15',
-            position: 'absolute',
-          }}
-        />
-        <h1>{data.title}</h1>
-        <div className='Rating'>TMDB Rating: {data.vote_average}</div>
-        <p>{data.overview}</p>
-        <div className='selection'>
-          <div className='status'>
-            <h3>Status:</h3>
-            <select
-              id='status'
-              onChange={(e) => handleStatusChange(e.target.value)}
-              value={status}
-            >
-              <option value='null'>--------</option>
-              <option value='planToWatch'>Plan to watch</option>
-              <option value='completed'>Completed</option>
-            </select>
+    <div className='backfilter'>
+      <div className='InfoCard'>
+        <div className='image'>
+          {data.poster_path ? (
+            <img src={IMG_URL + data.poster_path} alt={data.title} />
+          ) : null}
+        </div>
+        <div className='content'>
+          <CloseIcon
+            onClick={() => setOpened(false)}
+            style={{
+              cursor: 'pointer',
+              float: 'right',
+              right: '20',
+              top: '15',
+              position: 'absolute',
+            }}
+          />
+          <h1>{data.title}</h1>
+          <div className='Rating'>
+            {data.runtime}m |
+            {data.genres
+              ? data.genres.map((genre) => <span> {genre.name} </span>)
+              : null}
+            | TMDB: {data.vote_average}
           </div>
-          <div className='status'>
-            <h3>My Score:</h3>
-            <select
-              id='rating'
-              disabled={completed}
-              value={rating}
-              onChange={(e) => setRating(parseFloat(e.target.value, 2))}
-            >
-              <option value='none'>-----</option>
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-              <option value='6'>6</option>
-              <option value='7'>7</option>
-              <option value='8'>8</option>
-              <option value='9'>9</option>
-              <option value='10'>10</option>
-            </select>
+          <div className='selection'>
+            <div className='status'>
+              <h3>Status:</h3>
+              <select
+                id='status'
+                onChange={(e) => handleStatusChange(e.target.value)}
+                value={status}
+              >
+                <option value='null'>--------</option>
+                <option value='planToWatch'>Plan to watch</option>
+                <option value='completed'>Completed</option>
+              </select>
+            </div>
+            <div className='status'>
+              <h3>My Score:</h3>
+              <select
+                id='rating'
+                disabled={completed}
+                value={rating}
+                onChange={(e) => setRating(parseFloat(e.target.value, 2))}
+              >
+                <option value='0'>-----</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+                <option value='10'>10</option>
+              </select>
+            </div>
           </div>
+          <p>{data.overview}</p>
         </div>
       </div>
     </div>

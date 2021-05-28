@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
 import SearchIcon from '@material-ui/icons/Search';
 import Movie from '../Movie';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    flexGrow: 1,
+    width: '60%',
+    margin: '20px auto',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}));
 
 const SearchPage = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
+
   useEffect(() => {
     axios
       .get(
@@ -24,6 +38,9 @@ const SearchPage = () => {
       )
       .then((res) => setMovies(res.data.results));
   };
+
+  const classes = useStyles();
+
   return (
     <>
       <div className='Title'>
@@ -50,18 +67,19 @@ const SearchPage = () => {
           }}
         />
       </form>
-      <div className='content'>
-        <div className='Movies-container'>
+      <div className={classes.root}>
+        <Grid container spacing={2}>
           {movies.map((movieInfo) => (
-            <Movie
-              key={movieInfo.id}
-              title={movieInfo.title}
-              posterPath={movieInfo.poster_path}
-              voteAverage={movieInfo.vote_average}
-              id={movieInfo.id}
-            />
+            <Grid item xs={3} key={movieInfo.id} align='center'>
+              <Movie
+                title={movieInfo.title}
+                posterPath={movieInfo.poster_path}
+                voteAverage={movieInfo.vote_average}
+                id={movieInfo.id}
+              />
+            </Grid>
           ))}
-        </div>
+        </Grid>
       </div>
     </>
   );

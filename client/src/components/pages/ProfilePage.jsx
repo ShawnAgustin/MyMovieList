@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import MiniMovie from '../MiniMovie';
+import InfoCard from '../InfoCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,8 @@ const ProfilePage = () => {
 
   const [planToWatch, setplanToWatch] = useState([]);
   const [comp, setComp] = useState([]);
+  const [opened, setOpened] = useState(false);
+  const [opened2, setOpened2] = useState(false);
 
   // Get the localStorage and place them into useStates
   useEffect(() => {
@@ -46,7 +49,7 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <>
+    <div className='profilePage'>
       <h1>My Profile</h1>
       <div className={classes.root}>
         <Accordion>
@@ -64,6 +67,9 @@ const ProfilePage = () => {
                 posterPath={data.pp}
                 voteAverage={data.voteAverage}
               />
+              {opened ? (
+                <InfoCard id={data.id} opened={opened} setOpened={setOpened} />
+              ) : null}
             </AccordionDetails>
           ))}
         </Accordion>
@@ -85,11 +91,18 @@ const ProfilePage = () => {
                 voteAverage={data.voteAverage}
                 userScore={data.rating}
               />
+              {opened2 ? (
+                <InfoCard
+                  id={data.id}
+                  opened2={opened2}
+                  setOpened2={setOpened2}
+                />
+              ) : null}
             </AccordionDetails>
           ))}
         </Accordion>
       </div>
-    </>
+    </div>
   );
 };
 

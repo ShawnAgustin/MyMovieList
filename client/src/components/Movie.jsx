@@ -49,15 +49,7 @@ const Movie = (props) => {
         </div>
       </div>
       {opened ? (
-        <div
-          className='backfilter'
-          // onClick={() => setTrigger(false)}
-          // onKeyPress={() => handleKeyPress}
-          // role='button'
-          // tabIndex={0}
-        >
-          <InfoCard id={id} opened={opened} setOpened={setOpened} />
-        </div>
+        <InfoCard id={id} opened={opened} setOpened={setOpened} />
       ) : null}
     </>
   );
