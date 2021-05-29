@@ -30,6 +30,28 @@ const SearchPage = () => {
       .then((res) => setMovies(res.data.results));
   }, []);
 
+  useEffect(() => {
+    return () => {
+      console.log('added!');
+      axios
+        .post('http://localhost:5000/users/add', {
+          username: 'shawneeteem',
+          planToWatch: [
+            {
+              id: 2332,
+              title: 'story of seasons',
+              rating: 2.3,
+              genres: [
+                { id: 23, name: 'horror' },
+                { id: 222, name: 'comedy' },
+              ],
+            },
+          ],
+        })
+        .then((res) => console.log(res.data));
+    };
+  }, []);
+
   const search = (event) => {
     event.preventDefault();
     axios
