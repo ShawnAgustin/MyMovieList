@@ -35,6 +35,26 @@ const InfoCard = (props) => {
     setRating('null');
   };
 
+  const handleClose = () => {
+    axios
+      .post('http://localhost:5000/users/add', {
+        username: 'shawneeteem',
+        planToWatch: [
+          {
+            id: 2332,
+            title: 'story of seasons',
+            rating: 2.3,
+            genres: [
+              { id: 23, name: 'horror' },
+              { id: 222, name: 'comedy' },
+            ],
+          },
+        ],
+      })
+      .then(() => console.log('updated!'))
+      .then(setOpened(false));
+  };
+
   // Listener to whenever the user changes update the localstorage DB
   useEffect(() => {
     if (status === 'planToWatch' || status === 'completed') {
@@ -85,7 +105,7 @@ const InfoCard = (props) => {
         </div>
         <div className='content'>
           <CloseIcon
-            onClick={() => setOpened(false)}
+            onClick={handleClose}
             style={{
               cursor: 'pointer',
               float: 'right',
