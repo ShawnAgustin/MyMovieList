@@ -24,58 +24,60 @@ class _MovieWatchlistItemState extends State<MovieWatchlistItem> {
         child: Column(
           children: [
             Divider(),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
+            InkWell(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: ScreenManager.hp(1),
+                        horizontal: ScreenManager.wp(1.25)),
+                    width: ScreenManager.wp(20),
+                    child: CachedNetworkImage(
+                      imageUrl: MovieAPIManager.getPosterURL(widget.movie.posterPath),
+                      fit: BoxFit.cover,
+                      errorWidget: (context, error, stackTrace) {
+                        return _buildNoImage(context);
+                      },
+                    ),
+                  ),
+                  Container(  
+                    width: ScreenManager.wp(65),
+                    padding: EdgeInsets.symmetric(
                       vertical: ScreenManager.hp(1),
-                      horizontal: ScreenManager.wp(1.25)),
-                  width: ScreenManager.wp(20),
-                  child: CachedNetworkImage(
-                    imageUrl: MovieAPIManager.getPosterURL(widget.movie.posterPath),
-                    fit: BoxFit.cover,
-                    errorWidget: (context, error, stackTrace) {
-                      return _buildNoImage(context);
-                    },
-                  ),
-                ),
-                Container(  
-                  width: ScreenManager.wp(65),
-                  padding: EdgeInsets.symmetric(
-                    vertical: ScreenManager.hp(1),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(  
-                        padding: EdgeInsets.only(
-                          left: ScreenManager.wp(1.25),
-                          right: ScreenManager.wp(1.25),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(  
+                          padding: EdgeInsets.only(
+                            left: ScreenManager.wp(1.25),
+                            right: ScreenManager.wp(1.25),
+                          ),
+                          width: ScreenManager.wp(35),
+                          child: Text(
+                            '${widget.movie.title}',
+                            textAlign: TextAlign.left,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis, 
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
                         ),
-                        width: ScreenManager.wp(35),
-                        child: Text(
-                          '${widget.movie.title}',
-                          textAlign: TextAlign.left,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis, 
-                          style: Theme.of(context).textTheme.headline1,
-                        ),
-                      ),
-                      Container(  
-                        width: ScreenManager.wp(25),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _buildScoreText(
-                                context, 'My Score', '${widget.movie.rating}'), 
-                          ],
-                        ),
-                      )
-                    ],
+                        Container(  
+                          width: ScreenManager.wp(25),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _buildScoreText(
+                                  context, 'My Score', '${widget.movie.rating}'), 
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ));
