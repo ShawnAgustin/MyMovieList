@@ -15,8 +15,9 @@ router.route('/:id').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const username = req.body.username;
+    const planToWatch = req.body.planToWatch
 
-    const newUser = new User({ username, planToWatch:[], completed:[] });
+    const newUser = new User({ username, planToWatch });
 
     newUser.save()
         .then(() => res.json('User added!'))

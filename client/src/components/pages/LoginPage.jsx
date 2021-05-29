@@ -3,9 +3,14 @@ import axios from 'axios';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
+  const [planToWatch, setPlanToWatch] = useState([
+    { title: 'movie', rating: 5 },
+    { title: 'movie2', rating: 10 },
+  ]);
 
   const user = {
     username,
+    planToWatch,
   };
 
   const handleSubmit = (e) => {
@@ -13,6 +18,7 @@ const LoginPage = () => {
     axios
       .post('http://localhost:5000/users/add', user)
       .then((res) => console.log(res.data));
+    console.log(user);
   };
 
   return (
