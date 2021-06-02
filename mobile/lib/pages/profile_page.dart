@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:weeb_dev_my_movie_list/bloc/expansion_list_bloc.dart';
-import 'package:weeb_dev_my_movie_list/network/repositories/movie_repository.dart';
-import 'package:weeb_dev_my_movie_list/util/helpers/environment_manager.dart';
+import 'package:weeb_dev_my_movie_list/models/enums/movie_status.dart';
+import 'package:weeb_dev_my_movie_list/network/repositories/movie_repository.dart'; 
 import 'package:weeb_dev_my_movie_list/util/helpers/screen_manager.dart';
-import 'package:weeb_dev_my_movie_list/widgets/movie_watchlist_expansion_panel.dart';
+import 'package:weeb_dev_my_movie_list/widgets/builders/movie_watchlist_expansion_panel_builder.dart';
+
 
 class ProfilePage extends StatefulWidget {
   ProfilePage();
@@ -53,18 +54,18 @@ class _ProfilePageState extends State<ProfilePage> {
                 expansionCallback: _expansionListBloc.updatePanel,
                 elevation: 1,
                 children: [
+                  //TODO: Change movie list with actual movie list with respective status
                   MovieWatchlistExpansionPanelBuilder(context).buildByFuture(
-                      'Completed',
+                      MovieStatus.getStatusName(Status.COMPLETED),
                       MovieRepository().getPopularMovies(),
                       snapshot.data[0]),
                   MovieWatchlistExpansionPanelBuilder(context).buildByFuture(
-                      'Planned',
+                      MovieStatus.getStatusName(Status.PLANNED),
                       MovieRepository().searchMovies('Avengers'),
                       snapshot.data[1]),
                   MovieWatchlistExpansionPanelBuilder(context).buildByFuture(
-                      'Private',
-                      MovieRepository()
-                          .searchMovies(EnvironmentManager.getSpecial()),
+                      MovieStatus.getStatusName(Status.PRIVATE),
+                      MovieRepository().searchMovies('Toy Story'),
                       snapshot.data[2]),
                 ],
               );

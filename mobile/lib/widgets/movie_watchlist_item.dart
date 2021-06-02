@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weeb_dev_my_movie_list/bloc/movies_bloc.dart'; 
 import 'package:weeb_dev_my_movie_list/models/movie.dart';
 import 'package:weeb_dev_my_movie_list/network/api_managers/movie_api_manager.dart';
 import 'package:weeb_dev_my_movie_list/util/helpers/screen_manager.dart';
@@ -14,24 +16,31 @@ class MovieWatchlistItem extends StatefulWidget {
 }
 
 class _MovieWatchlistItemState extends State<MovieWatchlistItem> {
+  MoviesBloc _movieBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _movieBloc = BlocProvider.of<MoviesBloc>(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(
-            bottom: ScreenManager.hp(1),
-            left: ScreenManager.wp(2.5),
-            right: ScreenManager.wp(2.5)),
+        padding:
+            EdgeInsets.only(bottom: ScreenManager.hp(1), left: ScreenManager.wp(2.5), right: ScreenManager.wp(2.5)),
         child: Column(
           children: [
             Divider(),
             InkWell(
+              onTap: () {
+                _movieBloc.dispatchMovieDialog(context, widget.movie);
+              },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: ScreenManager.hp(1),
-                        horizontal: ScreenManager.wp(1.25)),
+                    padding: EdgeInsets.symmetric(vertical: ScreenManager.hp(1), horizontal: ScreenManager.wp(1.25)),
                     width: ScreenManager.wp(20),
                     child: CachedNetworkImage(
                       imageUrl: MovieAPIManager.getPosterURL(widget.movie.posterPath),
@@ -41,7 +50,7 @@ class _MovieWatchlistItemState extends State<MovieWatchlistItem> {
                       },
                     ),
                   ),
-                  Container(  
+                  Container(
                     width: ScreenManager.wp(65),
                     padding: EdgeInsets.symmetric(
                       vertical: ScreenManager.hp(1),
@@ -49,7 +58,7 @@ class _MovieWatchlistItemState extends State<MovieWatchlistItem> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(  
+                        Container(
                           padding: EdgeInsets.only(
                             left: ScreenManager.wp(1.25),
                             right: ScreenManager.wp(1.25),
@@ -59,17 +68,16 @@ class _MovieWatchlistItemState extends State<MovieWatchlistItem> {
                             '${widget.movie.title}',
                             textAlign: TextAlign.left,
                             maxLines: 3,
-                            overflow: TextOverflow.ellipsis, 
+                            overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.headline1,
                           ),
                         ),
-                        Container(  
+                        Container(
                           width: ScreenManager.wp(25),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _buildScoreText(
-                                  context, 'My Score', '${widget.movie.rating}'), 
+                              _buildScoreText(context, 'My Score', '${widget.movie.rating}'),
                             ],
                           ),
                         )
@@ -83,9 +91,8 @@ class _MovieWatchlistItemState extends State<MovieWatchlistItem> {
         ));
   }
 
-  Widget _buildScoreText(
-      BuildContext context, String scoreTitle, String scoreValue) {
-    return Container( 
+  Widget _buildScoreText(BuildContext context, String scoreTitle, String scoreValue) {
+    return Container(
       child: AutoSizeText.rich(
         TextSpan(text: '$scoreTitle: ', children: [
           TextSpan(
@@ -114,9 +121,7 @@ class _MovieWatchlistItemState extends State<MovieWatchlistItem> {
           Text(
             'No Image Found',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle1.copyWith(
-              fontSize: ScreenManager.hp(1.5)
-            ),
+            style: Theme.of(context).textTheme.subtitle1.copyWith(fontSize: ScreenManager.hp(1.5)),
           )
         ],
       ),

@@ -11,6 +11,7 @@ class Themes {
       backgroundColor: Colors.white,
       cardColor: Colors.white,
       canvasColor: Colors.white,
+      buttonColor: Colors.black45,
       textTheme: TextTheme(
           headline6: TextStyle(
               color: Colors.black,

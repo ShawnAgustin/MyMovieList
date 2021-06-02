@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weeb_dev_my_movie_list/bloc/movies_bloc/movies_bloc.dart';
+import 'package:weeb_dev_my_movie_list/bloc/movies_bloc.dart'; 
 import 'package:weeb_dev_my_movie_list/models/movie.dart';
 import 'package:weeb_dev_my_movie_list/models/response/movie_response.dart';
 import 'package:weeb_dev_my_movie_list/util/helpers/screen_manager.dart';
@@ -20,24 +20,23 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
   @override
   void initState() {
     super.initState();
-    _moviesBloc = MoviesBloc();
+    _moviesBloc = BlocProvider.of<MoviesBloc>(context);
   }
 
   @override
-  void dispose() {
-    _moviesBloc.dispose();
+  void dispose() { 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MoviesBloc>(
-      create: (context) => _moviesBloc,
-      child: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [MovieSearchBar(), _buildBody()],
-          ),
+    return SingleChildScrollView(
+      child: Container(
+        child: Column(
+          children: [
+            MovieSearchBar(), 
+            _buildBody()
+          ],
         ),
       ),
     );
